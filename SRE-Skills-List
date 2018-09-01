@@ -1,4 +1,12 @@
 1.Linux 系统
+    * C编程语言中的malloc、calloc函数和C++的 new 运算符都是在动态存储区(heap)上申请内存空间。
+    * cat 将两个文件
+
+
+
+
+
+
 2.开源软件
 Nginx(ngx_lua、openresty）
 LVS
