@@ -25,7 +25,7 @@
         - 2、通过偏移来索引，从而读取数据
         - 3、支持嵌套
         - 4、可变的类型
-	- 修改列表元素：列表名.[索引值] = 新值
+	- 修改列表元素：列表名[索引值] = 新值
 	- 添加列表元素：
 	   - 在列表末尾添加元素：append()  列表名.append(需添加的元素)
 		- 在列表中插入元素：insert()    列表名.insert(索引,需添加的元素)
@@ -39,5 +39,20 @@
       - 临时排序：  sorted() 
       - 倒着打印列表：reverse() 
       - 确定列表的长度：len() 
+- 遍历列表
+    - for 循环    for item in 列表:
+- 创建数值列表
+    - range()：生成一系列数字。
+        - range(2,11,2) 从2开始，不断加2，直到达到或超过终值。
+    - list()：可是将range()的结果直接转换成列表。 
+    - min()：寻找列表最小值
+    - max()：寻找列表最大值
+    - sum()：列表元素和
+    - 列表解析：
+        - 例子：squares = [value**2 for value in range(1,11)]  print(squares)
+    - 切片：指定要使用的第一个元素和最后一个元素的索引
+        - 例子：players = ['charles','martina','micheal','florence','eli']      print(players[1:3])
+    - 
+  
 
 
