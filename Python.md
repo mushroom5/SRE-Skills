@@ -1,6 +1,6 @@
 **Python**
 
-- 字符串
+- **字符串**
    - title() :以首字母大写的方式显示每个单词
    - upper() :全部大写
    - lower() :全部小写
@@ -9,15 +9,15 @@
    - lstrip() :删除字符串开头多余的空白
    - strip() :删除字符串两头多余的空白
 
-- 数字
+- **数字**
 	- 整数：+ — * / **（乘方）
 	- str() :将非字符串类型值转换成字符串
 	
-- 注释
+- **注释**
 	- '#'
 	- 目的：代码要做什么 如何做的
 
-- 列表
+- **列表**
 	- 概念：列表由一系列按特定顺序的元素组成。
 	- 表示：[ ]
 	- 特点: 
@@ -52,7 +52,39 @@
         - 例子：squares = [value**2 for value in range(1,11)]  print(squares)
     - 切片：指定要使用的第一个元素和最后一个元素的索引
         - 例子：players = ['charles','martina','micheal','florence','eli']      print(players[1:3])
-    - 
-  
+        - 遍历切片：for player in players[:3]: 
+    	print(player.title())
+    - 复制列表:
+        - 创建一个包含整个列表的切片，同时省略起始索引和终止索引（[:]）
+- **元组**：
+    - 不可变的列表被称为**元组**。
+    - 表示: ( )
+    - 虽然不能修改元组的元素，但是可以给存储元组的变量赋值。
+- **IF** 
+    - 条件测试:每条if语句的核心都是一个值为True或False的表达式，这种表达式被称为**条件测试**。 
+    - 检查是否相等： == 
+    - 检查是否不相等：！=
+    - 与：and
+    - 或：or
+    - 检查特定值是否包含在列表中：in
+    - 检查特定值是否不包含在列表中：not in
+    - if-elif-else
+    - 检查列表是否为空:
+        - requested_toppings = []
+        - if requested_toppings:
+        	   - for requested_topping in requested_toppings:
+        		  -   print("Adding" + requested_topping +".")
+        	   - print("\nFinished making your pizza")
+        	   
+        - else:
+        	   - print("Are you sure you want a plain pizza?")
+- **字典**
+    - 概念：字典是一系列键值对，每个键都与一个值相关联。
+    - 表示：{'key':'value',...}
+    - 字典是一种动态结构。
+    - 删除键值对：del 字典名['key']
+    - 遍历字典：
+        - 遍历所有的键-值对
+            - 
 
 
