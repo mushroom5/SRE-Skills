@@ -1,6 +1,6 @@
-**Python**
+# Python
 
-#  *字符串*
+#  字符串
 	* title() :以首字母大写的方式显示每个单词
 	* upper() :全部大写
 	* lower() :全部小写
@@ -9,15 +9,15 @@
 	* lstrip() :删除字符串开头多余的空白
 	* strip() :删除字符串两头多余的空白
 - - - -
-# *数字*
-	* 整数：+ — * / （乘方）
+# 数字
+	* 整数：+ — * / （乘方） %（求模运算）
 	* str() :将非字符串类型值转换成字符串
 - - - -
-# *注释*
+# 注释
 	* #
 	* 目的：代码要做什么 如何做的
 - - - -
-# *列表*
+# 列表
 	* 概念：列表由一系列按特定顺序的元素组成。
 	* 表示：[ ]
 	* 特点:
@@ -65,12 +65,12 @@ print(player.title())
 		* 复制列表:
 	  创建一个包含整个列表的切片，同时省略起始索引和终止索引（[:]）
 - - - -
-# *元组*：
-	* 不可变的列表被称为**元组**。
+# 元组
+	* 不可变的列表被称为元组。
 	* 表示: ( )
 	* 虽然不能修改元组的元素，但是可以给存储元组的变量赋值。
 - - - -
-# *IF*
+# IF
 	* 条件测试:每条if语句的核心都是一个值为True或False的表达式，这种表达式被称为**条件测试**。
 	* 检查是否相等： ==
 	* 检查是否不相等：！=
@@ -82,7 +82,7 @@ print(player.title())
 	* 检查列表是否为空:
 ```检查列表是否为空
 requested_toppings = []
-*if requested_toppings*:
+if requested_toppings:
 	for requested_topping in requested_toppings:
 		print("Adding" + requested_topping +".")
 	print("\nFinished making your pizza")
@@ -90,7 +90,7 @@ else:
 	 print("Are you sure you want a plain pizza?")
 ```
 - - - -
-#  *字典*
+#  字典
 	* 概念：字典是一系列键值对，每个键都与一个值相关联。
 	* 表示：{'key':'value',...}
 	* 字典是一种动态结构。
@@ -230,3 +230,76 @@ for username,user_info in users.items():
 	print("\tFull name: " + full_name.title())
 	print("\tLocation: " + location.title())
 ```
+- - - -
+# 用户输入
+* input() 函数让程序暂停运行，等待用户输入一些文本，获取用户输入后，Python将其存储在一个变量中。
+* int() 函数将数字的字符串表示转换为数值表示。
+```
+height = input("How tall are you , in inches? ")
+height = int(height)
+if height >= 36:
+    print("\nYou are tall enough to ride")
+else:
+    print("\nYou'll be able to ride when you're a little older.")
+```
+- - - -
+# While
+```
+prompt = "\nTell me something, and I will repeat it back to you: "
+prompt += "\nEnter 'quit' to end the program. "
+
+message = ""
+while message != 'quit':
+    message = input(prompt)
+    if message != "quit":
+        print("\n"+ message)
+```
+* 使用标志:在要求很多条件都满足才继续运行的程序中，可定义一个变量，用于判断整个程序是否处于活动状态，这个变量被称为标志。
+```
+prompt = "\nTell me something, and I will repeat it back to you: "
+prompt += "\nEnter 'quit' to end the program. "
+
+active = True
+while active:
+    message = input(prompt)
+    if message == "quit":
+        active = False
+    else:
+        print("\n"+ message)
+```
+* break退出循环
+* continue退出本次循环
+* while循环处理列表和字典
+for循环是一种遍历列表的有效方式，但在for循环中不应修改列表，否则导致Python难以跟踪其中的元素
+while循环可在遍历列表的同时对其进行修改。
+在列表之间移动元素：
+```
+unconfirmed_users = ['alice','brain','candace']
+confirmed_users = []
+
+while unconfirmed_users:
+    current_user = unconfirmed_users.pop()
+    print("Verifying user: " + current_user.title())
+    confirmed_users.append(current_user)
+print("\nThe following users have been confirmed: ")
+for confirmed_user in confirmed_users:
+    print(confirmed_user.title())
+```
+使用用户输入填充字典：
+```
+responses = {}
+polling_active = True
+
+while polling_active:
+    name = input("\nWhat's your name: ")
+    response = input("Which mountain would you like to climb someday? ")
+
+    responses[name] = response
+    repeat = input("Would you like to let another person respond?(yes or no)")
+    if repeat == 'no':
+        polling_active = False
+print("\n---Poll Result---")
+for name,response in responses.items():
+    print(name + " would like to climb " + response + ".")
+```
+
