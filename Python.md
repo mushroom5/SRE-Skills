@@ -302,4 +302,93 @@ print("\n---Poll Result---")
 for name,response in responses.items():
     print(name + " would like to climb " + response + ".")
 ```
+- - - -
+# 函数
+* 定义函数：def
+* 文档字符串注释：””” “””
+* 实参：调用函数时传递给函数的信息。
+* 形参：函数完成其工作所需的一项信息。
+* 位置实参：实参与形参按顺序一一对应。Python将按顺序将函数调用中的实参关联到函数定义中相应的形参。
+* 关键字实参：传递给函数的名称-值对。
+```
+def describe_pet(animal_type,pet_name):
+    print("\nI have a " + animal_type + ".")
+    print("My " + animal_type + "'s name " + pet_name.title() + ".")
+describe_pet(animal_type='hamster',pet_name='harry')
+```
+* 默认值：使用默认值时，在形参列表中必须先列出没有默认值的形参，再列出有默认值的实参。让Python依然能够正确地解读位置实参。
+```
+def describe_pet(pet_name,animal_type='dog'):
+    print("\nI have a " + animal_type + ".")
+    print("My " + animal_type + "'s name " + pet_name.title() + ".")
+describe_pet(pet_name='harry')
+```
+* 返回值：函数返回的值被称为返回值。
+* 实参可选：将实参指定一个默认值—空字符串
+```
+def get_formatted_name(first_name,last_name,middle_name=""):
+    if middle_name:
+        full_name = first_name + " " + middle_name + " "+ last_name
+    else:
+        full_name = first_name + " " + last_name
+    return full_name.title()
 
+musician = get_formatted_name('l','m',"j")
+print(musician)
+
+musician = get_formatted_name('l',"j")
+print(musician)
+```
+* 返回字典：
+```
+def build_person(first_name,last_name):
+    person = {'first':first_name,'last':last_name}
+    return person
+musician = build_person('l','mj')
+print(musician)
+```
+* 传递任意数量的实参
+```
+def make_pizza(*toppings):
+    print(toppings)
+
+make_pizza('pepperoni')
+make_pizza('mushroom','green peppers','extra cheese')
+```
+*号让Python创建一个空元祖。
+* 任意数量的关键字实参
+```
+def build_profile(first,last,**user_info):
+    profile = { }
+    profile['first_name'] = first
+    profile['last_name'] = last
+    for key,value in user_info.items():
+        profile[key] = value
+    return profile
+user_profile = build_profile('l','mj',
+                             location='beijing',
+                             field='physics')
+print(user_profile)
+        
+```
+号让Python创建了一个空字典。
+* 模块：将函数存储在独立文件中，是扩展名为.py的文件。
+* 导入整个模块
+import  模块名
+使用：module_name.function_name()
+* 导入特定的函数
+from  module_name import function_name,function2_name
+使用：function_name()
+* as 别名：
+*给函数在导入时起别名
+from  module_name import function_name  as  别名
+使用： 别名（）
+*给模块指定别名
+import  module_name as 别名
+使用：别名.function_name()
+* 导入模块中的所有函数
+from  module_name import *
+使用：function_name()
+- - - -
+# 类
+* 创建类：class  类名():     （类名首字母大写）
