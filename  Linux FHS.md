@@ -36,6 +36,6 @@
         
    为了避免硬盘空间用尽和崩溃的情况，/var 内置了“日志旋转”功能，可删除旧信息，为新信息腾出空间，维持固定的最大大小。
         
-![GitHub set up](https://github.com/mushroom5/SRE-Skills/blob/master/Images/根目录结构.png)
+![GitHub set up](/Users/user/MyGit/SRE-Skills/Images/根目录结构.png)
 
 
