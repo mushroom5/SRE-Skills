@@ -35,7 +35,7 @@
 * /var: 里保存“可变”长度的数据。这里的可变长度数据的类型通常是会累积的数据，就像日志和缓存一样。一个例子是你的内核保留的日志。
         
    为了避免硬盘空间用尽和崩溃的情况，/var 内置了“日志旋转”功能，可删除旧信息，为新信息腾出空间，维持固定的最大大小。
-        
-![GitHub set up](SRE-Skills/Images/根目录结构.png)
+   ![](https://github.com/mushroom5/SRE-Skills/blob/master/Images/根目录结构.png)
+
 
 
