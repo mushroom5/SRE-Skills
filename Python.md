@@ -1,4 +1,11 @@
 # Python
+### 数据类型
+* 整数
+* 浮点数
+* 字符串
+* 布尔值
+* 空值
+* 
 
 ###  字符串
 * title() :以首字母大写的方式显示每个单词
@@ -69,14 +76,71 @@
 		
 -------
 
-列表解析：
+列表解析(列表生成式)：
 
 ```
 squares = [value**2 for value in range(1,11)]  
 print(squares)
 ```
 
+
+```
+[x * x for x in range(1, 11) if x % 2 == 0]
+[4, 16, 36, 64, 100]
+```
+
+
+```
+[m + n for m in 'ABC' for n in 'XYZ']
+['AX', 'AY', 'AZ', 'BX', 'BY', 'BZ', 'CX', 'CY', 'CZ']
+```
+
 -------
+生成器：在Python中，一边循环一边计算的机制，称为生成器：generator。
+1.创建一个generator方法一：只要把一个列表生成式的`[]`改成`()`
+
+```
+>>> g = (x * x for x in range(10))
+>>> for n in g:
+...     print(n)
+... 
+0
+1
+4
+9
+16
+25
+36
+49
+64
+81
+```
+2.创建一个generator方法二：如果一个函数定义中包含`yield`关键字，那么这个函数就不再是一个普通函数，而是一个generator.
+斐波那契：
+
+```
+def fib(max):
+    n, a, b = 0, 0, 1
+    while n < max:
+        yield b
+        a, b = b, a + b
+        n = n + 1
+    return 'done'
+    
+>>> for n in fib(6):
+...     print(n)
+...
+1
+1
+2
+3
+5
+8
+```
+
+
+-------
+
 
 切片：指定要使用的第一个元素和最后一个元素的索引
 
@@ -364,6 +428,74 @@ for name,response in responses.items():
 ```
 
 -------
+### 迭代器
+概念：可以被`next()`函数调用并不断返回下一个值的对象称为`迭代器：Iterator`
+
+可以直接作用于`for`循环的数据类型有以下几种：
+
+一类是集合数据类型，如`list、tuple、dict、set、str`等；
+
+一类是generator，包括`生成器`和带`yield`的generator function。
+
+这些可以直接作用于for循环的对象统称为可迭代对象：Iterable。
+
+可以使用`isinstance()`判断一个对象是否是Iterable对象：
+
+```
+>>> from collections import Iterable
+>>> isinstance([], Iterable)
+True
+>>> isinstance({}, Iterable)
+True
+>>> isinstance('abc', Iterable)
+True
+>>> isinstance((x for x in range(10)), Iterable)
+True
+>>> isinstance(100, Iterable)
+False
+```
+
+生成器都是Iterator对象，但list、dict、str虽然是Iterable，却不是Iterator。
+
+把list、dict、str等Iterable变成Iterator可以使用iter()函数：
+
+```
+>>> isinstance(iter([]), Iterator)
+True
+>>> isinstance(iter('abc'), Iterator)
+True
+```
+为什么list、dict、str等数据类型不是Iterator？
+
+```
+这是因为Python的Iterator对象表示的是一个数据流，Iterator对象可以被next()函数调用并不断返回下一个数据，直到没有数据时抛出StopIteration错误。可以把这个数据流看做是一个有序序列，但我们却不能提前知道序列的长度，只能不断通过next()函数实现按需计算下一个数据，所以Iterator的计算是惰性的，只有在需要返回下一个数据时它才会计算。
+
+Iterator甚至可以表示一个无限大的数据流，例如全体自然数。而使用list是永远不可能存储全体自然数的。
+```
+
+Python的for循环本质上就是通过不断调用`next()`函数实现的，例如：
+
+```
+for x in [1, 2, 3, 4, 5]:
+    pass
+```
+
+实际上完全等价于：
+
+```
+# 首先获得Iterator对象:
+it = iter([1, 2, 3, 4, 5])
+# 循环:
+while True:
+    try:
+        # 获得下一个值:
+        x = next(it)
+    except StopIteration:
+        # 遇到StopIteration就退出循环
+        break
+```
+-------
+
 
 ### 函数
 定义函数：def
@@ -784,6 +916,121 @@ collections 模块下的 OrderedDict类可以实现有顺序的字典。
 ### 文件
 #### 从文件中读取数据：
 ##### 读取整个文件：
+```
+with open('../pi_digits.txt') as file_object:
+    contents = file_object.read()
+    print(contents.rstrip())
+```
+1. open(参数)：打开文件 返回的是文件对象
+2. 关键字with在不再需要访问文件后将其关闭。
+3. read(): 读取文件
+4. 相比原始文件，输出多一个空行，因为read()到达文件末尾时返回一个空字符串，可以使用rstrip()函数删除。
+
+##### 逐行读取：
+
+```
+filename = '../pi_digits.txt'
+with open(filename) as  file_object:
+    for line in file_object:
+        print(line.rstrip())
+```
+##### 将文件各行内容存储在列表里
+
+```
+filename = '../pi_digits.txt'
+with open(filename) as file_object:
+    lines = file_object.readlines()
+
+for line in lines:
+    print(line.rstrip())
+```
+##### 使用文件的内容
+
+```
+filename = '../pi_digits.txt'
+with open(filename) as file_object:
+    lines = file_object.readlines()
+
+pi_string = ''
+for line in lines:
+    pi_string += line.strip()
+
+print(pi_string)
+print(len(pi_string))
+```
+##### 写入空文件
+
+```
+filename = '../programming.txt'
+with open(filename,'w') as file_object:
+    file_object.write("I Love programming.")
+    
+with open(filename) as  file_object:
+    content = file_object.read()
+    print(content)
+```
+##### 写入多行
+
+```
+filename = '../programming.txt'
+with open(filename,'w') as file_object:
+    file_object.write("I Love programming.\n")
+    file_object.write("I am mushroom.\n")
+    
+with open(filename) as  file_object:
+    content = file_object.read()
+    print(content)
+```
+##### 附加到文件（追加不覆盖）
+
+```
+filename = '../programming.txt'
+with open(filename,'w') as file_object:
+    file_object.write("I Love programming.\n")
+    file_object.write("I am mushroom.\n")
+
+with open(filename,'a') as  file_object:
+    file_object.write("emmmmm......")
+    
+with open(filename) as  file_object:
+    content = file_object.read()
+    print(content)
+```
+##### 异常
+try-except-else:
+Python尝试执行try代码块中的代码，只有可能引发异常的代码才需要放在try语句中。有一些仅在try代码块成功执行时才需要运行的代码，放在else代码块中。except代码块告诉Python,如果尝试运行try代码块中的代码时引发了指定的异常，应该怎么去做。
+
+split()：函数以空格为分隔符将字符串拆分成多个部分，并将这些部分都存储到一个列表中。
+
+程序发生异常时，像什么都没发生一样继续执行，也不提示任何消息，可使用pass语句。
+##### 存储数据（模块JSON）
+**json.dump()**
+
+```
+import json
+numbers = [2,3,5,7,11,13]
+
+filename = "../number.json"
+with open(filename, 'w') as f_obj:
+    json.dump(numbers, f_obj)
+with open(filename) as  f_obj:
+    context = f_obj.read()
+    print(context)
+```
+**json.load()**
+
+```
+import json
+
+filename = '../number.json'
+with open(filename) as file_object:
+    numbers = json.load(file_object)
+print(numbers)
+```
+
+-------
+### 装饰器
+概念：在代码运行期间动态增加功能的方式，称之为“装饰器”（Decorator）。
 
 
 
